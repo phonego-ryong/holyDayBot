@@ -346,17 +346,16 @@ class HolyDayManage {
 
       if (message.length === 0) {
         console.log('취소 후 등록 할 메세지 없음');
-        return;
+      } else {
+        await app.client.chat.scheduleMessage({
+          token: context.botToken,
+          channel: payload.channel,
+          text: '휴가유령이 찾아왔어요!!',
+          blocks: message,
+          post_at: this.PREV_RESERVATION_DATE,
+        });
+        console.log('취소 후 메세지 등록 완료');
       }
-
-      await app.client.chat.scheduleMessage({
-        token: context.botToken,
-        channel: payload.channel,
-        text: '휴가유령이 찾아왔어요!!',
-        blocks: message,
-        post_at: this.PREV_RESERVATION_DATE,
-      });
-      console.log('취소 후 메세지 등록 완료');
     }
 
     console.log('휴가 당일 취소 시작');
@@ -426,17 +425,16 @@ class HolyDayManage {
 
     if (message.length === 0) {
       console.log('예약 메세지가 없음');
-      return;
+    } else {
+      await app.client.chat.scheduleMessage({
+        token: context.botToken,
+        channel: payload.channel,
+        text: '휴가유령이 찾아왔어요!!',
+        blocks: message,
+        post_at: this.RESERVATION_DATE,
+      });
+      console.log('취소 후 메세지 등록 완료');
     }
-
-    await app.client.chat.scheduleMessage({
-      token: context.botToken,
-      channel: payload.channel,
-      text: '휴가유령이 찾아왔어요!!',
-      blocks: message,
-      post_at: this.RESERVATION_DATE,
-    });
-    console.log('취소 후 메세지 등록 완료');
   }
 }
 
