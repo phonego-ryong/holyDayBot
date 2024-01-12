@@ -530,6 +530,7 @@ async function getCurDB(day) {
 }
 
 app.event('message', async ({ ack, say, payload, context }) => {
+  await ack();
   try {
     const isFlexBot = payload.user === 'U052HV3FKL5';
     if (isFlexBot) {
@@ -582,7 +583,7 @@ app.event('message', async ({ ack, say, payload, context }) => {
     }
   } catch (error) {
     console.log('catch error');
-    console.log(error);
+    console.error(error);
   }
 });
 
